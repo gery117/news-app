@@ -1,20 +1,38 @@
 const apiKey = process.env.NEWS_API_KEY;
-let url = `https://newsapi.org/v2/top-headlines?country=us&apiKey=${apiKey}`
 
 
-async function fetchNews(){
+// let url = `https://newsapi.org/v2/top-headlines?country=us&apiKey=${apiKey}`
+// let url = `https://newsapi.org/v2/everything?q=${topic}&apiKey=${apiKey}`
+
+
+// async function fetchNews(){
+//     try{
+//         const response = await fetch(url);
+//         const data = await response.json();
+//         console.log(data);
+
+//         displayNews(data.articles);
+//     }
+//     catch(error){
+//         console.log('There was an error',error);
+//     }
+// }
+// fetchNews()
+
+
+async function fetchNews(url){
     try{
         const response = await fetch(url);
         const data = await response.json();
         console.log(data);
- 
+
         displayNews(data.articles);
     }
     catch(error){
         console.log('There was an error',error);
     }
 }
-fetchNews()
+fetchNews(`https://newsapi.org/v2/top-headlines?country=us&apiKey=${apiKey}`);
 
 // function displayNews(articles){
 //     const newsDiv = document.querySelector('#news');
@@ -54,6 +72,7 @@ fetchNews()
 //     }
 // }
 
+
 function displayNews(articles){
     const newsDiv = document.querySelector('#news');
 
@@ -74,7 +93,6 @@ function displayNews(articles){
         const image = document.createElement('img');
         image.src = article.urlToImage;
         image.alt = "news image";
-        // image.class="card-img-top";
         image.classList.add('img-fluid')
         if(article.urlToImage===null){
             continue
@@ -82,7 +100,8 @@ function displayNews(articles){
         else{
             cardBody.appendChild(image);
         }
-        
+        // cardBody.appendChild(image);
+
         const cardTitle = document.createElement('h5');
         cardTitle.classList.add('card-title');
         cardTitle.textContent = article.title;
@@ -113,14 +132,16 @@ function displayNews(articles){
     }
 }
 
-// let Header = document.querySelector('h1');
-// let BusinessButton = document.querySelector('.businessButton');
-// // BusinessButton.addEventListener('click',changeHeadLines);
+let Header = document.querySelector('h1');
+let SearchButton = document.querySelector('#searchButon');
+SearchButton.addEventListener('click',changeHeadLines);
 
+function changeHeadLines(){
 
-// function changeHeadLines(){
-//     Header.textContent = "Business headlines";
-//     url = `https://newsapi.org/v2/top-headlines?category=business&country=us&apiKey=${apiKey}`
-// }
-
-
+    let answer = prompt('What are you looking for');
+    Header.textContent = `Search: ${answer}`;
+    fetchNews(`https://newsapi.org/v2/everything?q=${answer}&apiKey=${apiKey}`);     
+}
+    
+    // url = `https://newsapi.org/v2/top-headlines?category=business&country=us&apiKey=${apiKey}`
+    
