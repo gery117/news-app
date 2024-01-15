@@ -7,7 +7,7 @@ async function fetchNews(){
         const response = await fetch(url);
         const data = await response.json();
         console.log(data);
- 
+
         displayNews(data.articles);
     }
     catch(error){
@@ -16,43 +16,6 @@ async function fetchNews(){
 }
 fetchNews()
 
-// function displayNews(articles){
-//     const newsDiv = document.querySelector('#news');
-//     for(const article of articles){
-//         const articleDiv = document.createElement('div');
-//         articleDiv.classList.add('card');
-        
-//         // create and apend a headline to the article div
-//         const title = document.createElement('h4');
-//         title.textContent = article.title;
-//         articleDiv.appendChild(title);
-
-//         // create and append more elements to article div
-        
-//         const author = document.createElement('p');
-//         author.textContent =` Author: ${article.author}`;
-//         articleDiv.appendChild(author);
-
-//         const image = document.createElement('img');
-//         image.src = article.urlToImage;
-//         image.alt = "news image";
-//         image.width = 500;
-//         image.height = 300;
-//         articleDiv.appendChild(image);
-
-//         const content = document.createElement('p');
-//         content.textContent = article.content;
-//         articleDiv.appendChild(content);
-
-//         const source = document.createElement('p');
-//         // source.textContent = article.source;
-//         source.textContent = `Source: ${article.source.name}`;
-//         articleDiv.appendChild(source);
-        
-//         newsDiv.appendChild(articleDiv);
-
-//     }
-// }
 
 function displayNews(articles){
     const newsDiv = document.querySelector('#news');
@@ -113,14 +76,6 @@ function displayNews(articles){
     }
 }
 
-// let Header = document.querySelector('h1');
-// let BusinessButton = document.querySelector('.businessButton');
-// // BusinessButton.addEventListener('click',changeHeadLines);
 
-
-// function changeHeadLines(){
-//     Header.textContent = "Business headlines";
-//     url = `https://newsapi.org/v2/top-headlines?category=business&country=us&apiKey=${apiKey}`
-// }
 
 
